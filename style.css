@@ -197,6 +197,12 @@ img {
     margin-top: 26px;
 }
 
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
