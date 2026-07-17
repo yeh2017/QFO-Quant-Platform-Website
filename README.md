@@ -6,7 +6,7 @@ QFO Quant Platform Website 是 [QFO量化回测平台](https://github.com/yeh201
 
 ## 在线访问
 
-[https://qfo-website-yyy18337s-projects.vercel.app/](https://qfo-website-yyy18337s-projects.vercel.app/)
+[https://www.qfo-quant-platform.com/](https://www.qfo-quant-platform.com/)
 
 ## 本地预览
 
