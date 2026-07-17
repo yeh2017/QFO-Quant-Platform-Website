@@ -30,7 +30,6 @@
 
     <div class="layout" id="top">
         <aside class="side-nav" aria-label="文档目录">
-            <p class="side-title">学习目录</p>
             <a href="#overview">平台总览</a>
             <a href="#quickstart">快速开始</a>
             <a href="#workflow">学习路径</a>
@@ -38,10 +37,10 @@
             <a href="#modules">功能模块</a>
             <a href="#preview">产品预览</a>
             <a href="#config">配置说明</a>
-            <a href="#sandbox">实战沙盒</a>
             <a href="#faq">常见问题</a>
-            <a href="#contact">问题反馈</a>
+            <a href="#sandbox">实战沙盒</a>
             <a href="#notice">免责声明</a>
+            <a href="#contact">问题反馈</a>
         </aside>
 
         <main class="content">
@@ -226,6 +225,31 @@ run_first_time.bat</code></pre>
                 </aside>
             </section>
 
+            <section class="section" id="faq">
+                <div class="section-heading">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>常见问题</h2>
+                </div>
+                <details open>
+                    <summary>只看教学网站需要安装环境吗？</summary>
+                    <p>不需要。教学网站是静态页面，浏览器打开即可。完整运行主项目时才需要 Python、Node.js 和数据源 Token。</p>
+                </details>
+                <details>
+                    <summary>运行后没有数据怎么办？</summary>
+                    <p>请先在主项目设置页面填写自己的 Tushare Token，然后进入数据中台执行数据同步。只浏览教学网站不需要 Token；完整运行主项目时，行情、财务和基础数据都依赖数据源配置。</p>
+                </details>
+                <details>
+                    <summary>为什么首次同步数据较慢？</summary>
+                    <p>首次同步耗时取决于本地是否已有数据库水位、是否勾选“强制补历史（忽略水位全量重拉）”、Tushare 积分额度和网络稳定性。</p>
+                    <p>日常已有水位的增量同步，约 2 分钟属于正常且很快的水平；最新季报或中报财务数据单独拉取，通常需要 30 分钟到 50 分钟；空库首次建仓或强制补历史数据，通常需要 2 到 4 小时。</p>
+                    <p>“财务报表最新 2026-06-30”这类日期是正常的季报或中报报告期日期，不是同步当天日期。强制补历史适合首次建仓、修复缺口或主动重建数据库，不建议作为每天常规同步方式。</p>
+                </details>
+                <details>
+                    <summary>新闻和推送为什么没有结果？</summary>
+                    <p>新闻搜索、LLM 摘要和推送通知依赖可选 API Key 或 Webhook，需要先在主项目设置页配置。</p>
+                </details>
+            </section>
+
             <section class="section" id="sandbox">
                 <div class="section-heading">
                     <p class="eyebrow">Practice</p>
@@ -253,31 +277,6 @@ run_first_time.bat</code></pre>
                         <div><span>夏普比率</span><strong id="sharpeMetric">1.42</strong></div>
                     </div>
                 </div>
-            </section>
-
-            <section class="section" id="faq">
-                <div class="section-heading">
-                    <p class="eyebrow">FAQ</p>
-                    <h2>常见问题</h2>
-                </div>
-                <details open>
-                    <summary>只看教学网站需要安装环境吗？</summary>
-                    <p>不需要。教学网站是静态页面，浏览器打开即可。完整运行主项目时才需要 Python、Node.js 和数据源 Token。</p>
-                </details>
-                <details>
-                    <summary>运行后没有数据怎么办？</summary>
-                    <p>请先在主项目设置页面填写自己的 Tushare Token，然后进入数据中台执行数据同步。只浏览教学网站不需要 Token；完整运行主项目时，行情、财务和基础数据都依赖数据源配置。</p>
-                </details>
-                <details>
-                    <summary>为什么首次同步数据较慢？</summary>
-                    <p>首次同步耗时取决于本地是否已有数据库水位、是否勾选“强制补历史（忽略水位全量重拉）”、Tushare 积分额度和网络稳定性。</p>
-                    <p>日常已有水位的增量同步，约 2 分钟属于正常且很快的水平；最新季报或中报财务数据单独拉取，通常需要 30 分钟到 50 分钟；空库首次建仓或强制补历史数据，通常需要 2 到 4 小时。</p>
-                    <p>“财务报表最新 2026-06-30”这类日期是正常的季报或中报报告期日期，不是同步当天日期。强制补历史适合首次建仓、修复缺口或主动重建数据库，不建议作为每天常规同步方式。</p>
-                </details>
-                <details>
-                    <summary>新闻和推送为什么没有结果？</summary>
-                    <p>新闻搜索、LLM 摘要和推送通知依赖可选 API Key 或 Webhook，需要先在主项目设置页配置。</p>
-                </details>
             </section>
 
             <section class="section warning" id="notice">
