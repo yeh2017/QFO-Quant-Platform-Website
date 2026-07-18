@@ -252,9 +252,11 @@ img {
     background: #f8fafc;
 }
 
-.notice-inline > strong {
-    display: block;
-    margin-bottom: 6px;
+.notice-inline h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--ink);
 }
 
 .notice-inline p {
@@ -265,11 +267,32 @@ img {
 .notice-inline ol {
     margin: 8px 0 10px;
     padding-left: 20px;
-    color: var(--muted);
+    color: var(--ink);
+}
+
+.notice-inline a {
+    color: #0969da;
 }
 
 .notice-inline li + li {
     margin-top: 4px;
+}
+
+.notice-note {
+    margin-top: 10px;
+    padding-left: 12px;
+    border-left: 4px solid #d0d7de;
+    color: #57606a;
+}
+
+.notice-note strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.notice-note ul {
+    margin: 0;
+    padding-left: 20px;
 }
 
 .steps,

@@ -8,6 +8,18 @@ QFO Quant Platform Website 是 [QFO量化回测平台](https://github.com/yeh201
 
 [https://www.qfo-quant-platform.com/](https://www.qfo-quant-platform.com/)
 
+## 快速开始
+
+### 快速开始（Windows 用户）
+
+1. **下载**：[直接下载 ZIP 源码包](https://github.com/yeh2017/QFO-Quant-Platform/archive/refs/heads/main.zip)
+2. **解压**：将压缩包解压到一个**不包含中文、空格**的路径下，例如 `D:\QFO`。
+3. **运行**：双击文件夹内的 `run_first_time.bat` 启动。
+
+> **注意**
+> - 请勿直接在压缩包内运行。
+> - 需要使用 Python、Node.js 运行环境。
+
 ## 本地预览
 
 ```bash
