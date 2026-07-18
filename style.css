@@ -192,7 +192,7 @@ img {
 
 .hero-actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 12px;
     margin-top: 26px;
 }
@@ -632,6 +632,10 @@ details p {
     .hero,
     .section {
         padding: 22px;
+    }
+
+    .hero-actions {
+        flex-wrap: wrap;
     }
 
     .hero h1 {
