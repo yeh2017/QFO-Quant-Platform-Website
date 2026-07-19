@@ -731,6 +731,11 @@ details p {
         overflow-x: auto;
         gap: 16px;
         padding-bottom: 2px;
+        scrollbar-width: none;
+    }
+
+    .top-nav::-webkit-scrollbar {
+        display: none;
     }
 
     .layout {
