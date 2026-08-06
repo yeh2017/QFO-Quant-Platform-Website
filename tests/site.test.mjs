@@ -9,6 +9,8 @@ const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url
 
 test('uses current product positioning and social metadata', () => {
   assert.match(html, /<title>QFO量化回测平台 \| A股量化研究与回测工具<\/title>/);
+  assert.match(html, /免费开源、本地运行的 A 股量化研究与回测平台/);
+  assert.match(html, /<h1>免费开源的 A 股量化回测平台<\/h1>/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.qfo-quant-platform\.com\/"/);
   assert.match(html, /property="og:title"/);
   assert.match(html, /name="twitter:card"/);
@@ -19,6 +21,15 @@ test('uses current product positioning and social metadata', () => {
   assert.equal(structuredData.softwareVersion, 'latest');
   assert.match(structuredData.downloadUrl, /releases\/latest\/download\/QFO-Quant-Platform\.zip/);
   assert.doesNotMatch(html, /教学网站|组合风控|智能选股与因子/);
+});
+
+test('prioritizes release download and GitHub in the hero actions', () => {
+  const hero = html.match(/<section class="hero" id="overview">([\s\S]*?)<\/section>/)?.[1] || '';
+  const actions = hero.match(/<div class="hero-actions">([\s\S]*?)<\/div>/)?.[1] || '';
+  assert.match(
+    actions,
+    /data-release-download[\s\S]*?>查看 GitHub<[\s\S]*?href="#quickstart">三步快速开始<[\s\S]*?href="#preview">产品预览</,
+  );
 });
 
 test('offers a stable release download', () => {
