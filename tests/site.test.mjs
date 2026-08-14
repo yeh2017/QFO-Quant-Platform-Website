@@ -52,6 +52,15 @@ test('links the independent Codex cleanup tool without implying QFO integration'
   assert.match(section, /target="_blank" rel="noopener noreferrer"/);
 });
 
+test('routes user questions to Discussions and reproducible bugs to Issue Forms', () => {
+  const contact = html.match(/<section class="section" id="contact">([\s\S]*?)<\/section>/)?.[1] || '';
+  assert.match(contact, /安装或操作问题/);
+  assert.match(contact, /QFO-Quant-Platform\/discussions/);
+  assert.match(contact, />进入 Discussions</);
+  assert.match(contact, /QFO-Quant-Platform\/issues\/new\/choose/);
+  assert.match(contact, />提交 Issue</);
+});
+
 test('shows at least six real product previews', () => {
   const preview = html.match(/<section class="section" id="preview">([\s\S]*?)<\/section>/)?.[1] || '';
   assert.ok((preview.match(/<figure>/g) || []).length >= 6);
