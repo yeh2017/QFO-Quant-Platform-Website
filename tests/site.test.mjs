@@ -38,6 +38,20 @@ test('offers a stable release download', () => {
   assert.doesNotMatch(html, />v1\.0\.0</);
 });
 
+test('links the independent Codex cleanup tool without implying QFO integration', () => {
+  const noticeIndex = html.indexOf('id="notice"');
+  const toolIndex = html.indexOf('id="other-tools"');
+  const contactIndex = html.indexOf('id="contact"');
+  assert.ok(noticeIndex < toolIndex && toolIndex < contactIndex);
+
+  const section = html.match(/<section class="section" id="other-tools">([\s\S]*?)<\/section>/)?.[1] || '';
+  assert.match(section, /作者的其他开源工具/);
+  assert.match(section, /chatgpt-codex-local-history-cleanup-tool/);
+  assert.match(section, /chatgpt-codex-local-history-cleanup-tool\/releases\/latest/);
+  assert.match(section, /与 QFO 功能和数据互不关联/);
+  assert.match(section, /target="_blank" rel="noopener noreferrer"/);
+});
+
 test('shows at least six real product previews', () => {
   const preview = html.match(/<section class="section" id="preview">([\s\S]*?)<\/section>/)?.[1] || '';
   assert.ok((preview.match(/<figure>/g) || []).length >= 6);

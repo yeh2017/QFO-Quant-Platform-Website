@@ -376,6 +376,44 @@ figure,
     padding: 18px;
 }
 
+.related-tool-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+}
+
+.related-tool-copy h3 {
+    margin: 10px 0 8px;
+}
+
+.related-tool-copy p {
+    margin: 0;
+}
+
+.related-tool-label {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.related-tool-note {
+    margin-top: 12px !important;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.related-tool-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
 .step span {
     width: 28px;
     height: 28px;
@@ -773,8 +811,13 @@ details p {
     .feature-list,
     .preview-grid,
     .walkthrough-grid,
+    .related-tool-card,
     .sandbox-result {
         grid-template-columns: 1fr;
+    }
+
+    .related-tool-actions {
+        justify-content: flex-start;
     }
 
     .timeline li {

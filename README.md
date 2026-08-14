@@ -40,3 +40,4 @@ python -m http.server 5177
 
 - 主项目：[QFO-Quant-Platform](https://github.com/yeh2017/QFO-Quant-Platform)
 - 教学网站：[QFO-Quant-Platform-Website](https://github.com/yeh2017/QFO-Quant-Platform-Website)
+- 作者的其他开源工具：[ChatGPT/Codex 本地历史记录清理工具](https://github.com/yeh2017/chatgpt-codex-local-history-cleanup-tool)（独立的非官方社区工具，与 QFO 功能和数据互不关联）
