@@ -28,7 +28,7 @@ test('prioritizes release download, GitHub, quick start, and the full tutorial v
   const actions = hero.match(/<div class="hero-actions">([\s\S]*?)<\/div>/)?.[1] || '';
   assert.match(
     actions,
-    /data-release-download[\s\S]*?>查看 GitHub<[\s\S]*?href="#quickstart">三步快速开始<[\s\S]*?href="https:\/\/www\.bilibili\.com\/video\/BV1jWgp6HENq\/"[^>]*>观看完整教学视频</,
+    /data-release-download[\s\S]*?>查看 GitHub<[\s\S]*?href="#quickstart">三步快速开始<[\s\S]*?href="https:\/\/www\.bilibili\.com\/video\/BV18Cby6XEfR\/"[^>]*>观看完整教学视频</,
   );
 });
 
