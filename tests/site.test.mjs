@@ -23,12 +23,20 @@ test('uses current product positioning and social metadata', () => {
   assert.doesNotMatch(html, /教学网站|组合风控|智能选股与因子/);
 });
 
-test('prioritizes release download, GitHub, the 73-second overview, and the full tutorial', () => {
+test('separates primary conversion actions from secondary learning links', () => {
   const hero = html.match(/<section class="hero" id="overview">([\s\S]*?)<\/section>/)?.[1] || '';
   const actions = hero.match(/<div class="hero-actions">([\s\S]*?)<\/div>/)?.[1] || '';
+  const learningLinks = hero.match(/<nav class="hero-learning-links"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+
+  assert.equal((actions.match(/class="button/g) || []).length, 2);
   assert.match(
     actions,
-    /data-release-download[\s\S]*?>查看 GitHub<[\s\S]*?href="https:\/\/www\.bilibili\.com\/video\/BV1yDbQ6cEW7\/"[^>]*>73秒项目总览<[\s\S]*?href="https:\/\/www\.bilibili\.com\/video\/BV18Cby6XEfR\/"[^>]*>观看完整教学视频</,
+    /data-release-download[\s\S]*?>查看 GitHub</,
+  );
+  assert.doesNotMatch(actions, /bilibili\.com|#quickstart/);
+  assert.match(
+    learningLinks,
+    /BV1yDbQ6cEW7\/"[^>]*>73秒项目总览<[\s\S]*?BV18Cby6XEfR\/"[^>]*>完整教学<[\s\S]*?href="#quickstart">三步快速开始</,
   );
 });
 

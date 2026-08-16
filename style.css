@@ -208,6 +208,20 @@ img {
     margin-top: 26px;
 }
 
+.hero-learning-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.hero-learning-links a {
+    color: var(--accent-2);
+    text-underline-offset: 3px;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -797,6 +811,10 @@ details p {
     .hero-actions .button {
         flex: 1 1 calc(50% - 6px);
         min-width: 0;
+    }
+
+    .hero-learning-links {
+        gap: 10px 16px;
     }
 
     .hero h1 {
