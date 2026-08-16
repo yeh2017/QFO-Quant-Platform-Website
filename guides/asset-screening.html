@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="比较 QFO 中股票、ETF、可转债筛选的目标、指标、操作入口和结果字段，帮助量化新手选择正确的筛选方法。">
+    <title>股票、ETF、可转债筛选有什么区别 | QFO 新手教程</title>
+    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/asset-screening.html">
+    <meta property="og:type" content="article"><meta property="og:title" content="股票、ETF、可转债筛选有什么区别"><meta property="og:description" content="从资产结构出发，比较三类筛选方法。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/asset-screening.html"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
+</head>
+<body class="guide-page">
+    <header class="site-header guide-header"><a class="brand" href="../" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="./">返回教程中心</a><a href="windows-install.html">从安装开始</a></nav></header>
+    <main class="guide-layout"><article>
+        <header class="guide-hero"><p class="eyebrow">Smart Screening</p><h1>股票、ETF、可转债筛选有什么区别</h1><p class="lead">三类资产的价格驱动因素不同，因此不能用同一套条件机械比较。</p></header>
+        <div class="guide-content">
+            <h2>一张表看懂核心区别</h2>
+            <table><thead><tr><th>资产</th><th>主要研究对象</th><th>QFO 重点指标</th><th>适合解决的问题</th></tr></thead><tbody>
+                <tr><td><strong>股票</strong></td><td>上市公司与行业</td><td>反转、因子、估值、成长、资金、事件、行业轮动</td><td>从大量个股中寻找符合研究假设的公司。</td></tr>
+                <tr><td><strong>ETF</strong></td><td>指数、行业或主题组合</td><td>市场概览、反转信号、板块轮动、趋势、流动性、规模、分类</td><td>比较板块和资产方向，降低单一个股风险。</td></tr>
+                <tr><td><strong>可转债</strong></td><td>债券价值与转股期权</td><td>双低分、价格、转股溢价率、评级、剩余规模</td><td>在债性、股性和估值之间寻找相对平衡。</td></tr>
+            </tbody></table>
+            <h2>股票筛选：公司、因子和行业共同作用</h2>
+            <p>股票模块提供个股弱转强 Top5、个股强转弱 Top5、因子信号和行业轮动信号。你可以先观察市场与行业，再使用行业筛选、自定义条件或“智能行业”组合条件，最后在结果表查看候选股票、关联 ETF、可转债和诊断字段。</p>
+            <h2>ETF 筛选：先看板块，再看产品</h2>
+            <p>ETF 模块先展示市场概览、ETF 弱转强与强转弱信号，再通过板块轮动热力图观察分类强弱。分类筛选用于缩小到某一指数、行业或主题；个股联动用于从活跃 ETF 反查相关股票。结果重点关注趋势、流动性、规模和分类，不使用公司财务指标直接替代基金分析。</p>
+            <h2>可转债筛选：围绕双低和约束条件</h2>
+            <p>可转债模块以“双低分 = 转债价格 + 转股溢价率”为重要参考，同时提供策略预设、自定义价格与溢价率条件、评级等约束，以及一键推荐条件。结果表用于比较双低分、价格、溢价率、正股和剩余规模等字段。</p>
+            <h2>量化新手怎么选择</h2>
+            <ol><li>想研究公司基本面、因子和行业：从股票开始。</li><li>想研究指数、行业或主题轮动：从 ETF 开始。</li><li>想研究债性与股性的混合定价：使用可转债筛选。</li><li>筛选结果只是候选集合，后续仍需因子解释、策略回测和风险分析。</li></ol>
+            <div class="guide-callout warning"><p><strong>风险提示：</strong>筛选分数、排行和历史信号不代表未来收益，也不是买卖建议。QFO 仅用于量化研究、策略验证和编程学习，不构成投资建议。</p></div>
+            <div class="guide-actions"><a class="button primary" href="https://www.bilibili.com/video/BV18Cby6XEfR/" target="_blank" rel="noopener noreferrer">观看完整操作教学</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E4%BD%BF%E7%94%A8%E4%BA%A4%E6%B5%81" target="_blank" rel="noopener noreferrer">到 Discussions 交流</a></div>
+        </div>
+    </article><p class="guide-footer">先明确研究对象，再选择筛选指标；不要只根据一个排行做判断。</p></main>
+</body>
+</html>

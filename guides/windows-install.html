@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QFO Windows 首次安装教程：环境准备、正确解压、一键启动，以及 Python、Node.js、依赖安装等常见错误排查。">
+    <title>Windows 首次安装与常见错误 | QFO 新手教程</title>
+    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/windows-install.html">
+    <meta property="og:type" content="article"><meta property="og:title" content="Windows 首次安装与常见错误"><meta property="og:description" content="从下载、解压到首次启动，逐项排查 QFO 安装问题。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/windows-install.html"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
+</head>
+<body class="guide-page">
+    <header class="site-header guide-header"><a class="brand" href="../" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="./">返回教程中心</a><a href="first-data-sync.html">下一篇：数据同步</a></nav></header>
+    <main class="guide-layout">
+        <article>
+            <header class="guide-hero"><p class="eyebrow">Windows Setup</p><h1>Windows 首次安装与常见错误</h1><p class="lead">首次运行的目标只有三个：环境可用、项目完整解压、首次启动脚本执行成功。</p></header>
+            <div class="guide-content">
+                <h2>一、安装前准备</h2>
+                <ul><li>Windows 10 或 Windows 11。</li><li>Python 3.12 或更高版本，安装时勾选 <strong>Add Python to PATH</strong>。</li><li>Node.js 18 或更高版本。</li><li>保持网络可用，首次运行需要下载 Python 和 Node.js 依赖。</li></ul>
+                <h2>二、正确下载与解压</h2>
+                <ol><li>从 QFO 最新 Release 下载稳定版 ZIP。</li><li>完整解压到独立文件夹，不要直接在压缩包预览窗口中运行。</li><li>优先使用不含中文、空格和特殊符号的短路径，例如 <code>D:\QFO</code>。</li></ol>
+                <div class="guide-callout"><p><strong>首次运行：</strong>双击 <code>run_first_time.bat</code>。它会检查环境、创建 Python 虚拟环境、安装前后端依赖并启动服务。安装完成后的日常启动使用 <code>run_quick_start.bat</code>。</p></div>
+                <h2>三、常见错误与处理</h2>
+                <table><thead><tr><th>现象</th><th>原因与处理</th></tr></thead><tbody>
+                    <tr><td>Python not found</td><td>重新安装 Python 3.12+，勾选 Add Python to PATH；安装后关闭并重新打开启动窗口。</td></tr>
+                    <tr><td>Node.js not found</td><td>安装 Node.js 18+，完成后重新运行首次启动脚本。</td></tr>
+                    <tr><td>依赖下载很慢或失败</td><td>通常是网络连接或软件源临时异常。保持项目文件不动，网络恢复后再次运行 <code>run_first_time.bat</code>。</td></tr>
+                    <tr><td>双击后窗口立即关闭</td><td>确认文件已经完整解压；在文件夹地址栏输入 <code>cmd</code>，再运行脚本以保留错误信息。</td></tr>
+                    <tr><td>页面打开但没有数据</td><td>安装已经完成。进入设置页填写自己的 Tushare Token，再到数据中台执行同步。</td></tr>
+                    <tr><td>端口被占用</td><td>关闭此前启动的 QFO、Python 或 Node.js 窗口，然后重新启动；不要同时运行多份项目。</td></tr>
+                </tbody></table>
+                <h2>四、提交问题前准备</h2>
+                <p>如果仍然失败，请记录 Windows 版本、Python 版本、Node.js 版本、项目解压路径、完整错误截图和启动日志。Token、API Key 等敏感信息必须遮挡或删除。</p>
+                <div class="guide-actions"><a class="button primary" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98" target="_blank" rel="noopener noreferrer">到 Discussions 交流</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/issues/new?template=install-failure.yml" target="_blank" rel="noopener noreferrer">安装失败反馈</a></div>
+            </div>
+        </article>
+        <p class="guide-footer">不要在截图或日志中公开 Token、API Key、密码和个人联系方式。</p>
+    </main>
+</body>
+</html>

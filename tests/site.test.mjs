@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
@@ -80,6 +80,7 @@ test('contains mobile overflow protections', () => {
   assert.match(css, /\.top-nav a\s*{[^}]*white-space:\s*nowrap/s);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.side-nav\s*{[^}]*display:\s*none/s);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.hero-actions\s*{[^}]*flex-wrap:\s*wrap/s);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.guide-content table\s*{[^}]*display:\s*block[^}]*overflow-x:\s*auto/s);
 });
 
 test('sizes images and lazily loads preview media', () => {
@@ -105,6 +106,47 @@ test('ships crawler metadata files', () => {
   const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
   assert.match(robots, /Sitemap: https:\/\/www\.qfo-quant-platform\.com\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>/);
+});
+
+test('publishes a beginner guide hub and links it from the homepage', () => {
+  const guidesPath = new URL('../guides/index.html', import.meta.url);
+  assert.ok(existsSync(guidesPath), 'missing guides/index.html');
+  assert.match(html, /href="guides\/">新手教程<\/a>/);
+  assert.match(html, /id="guides"/);
+
+  const guides = readFileSync(guidesPath, 'utf8');
+  assert.match(guides, /Windows 首次安装与常见错误/);
+  assert.match(guides, /首次数据同步为什么需要 2～4 小时/);
+  assert.match(guides, /股票、ETF、可转债筛选有什么区别/);
+});
+
+test('publishes three focused and cross-linked beginner guides', () => {
+  const files = [
+    ['windows-install.html', /run_first_time\.bat/, /安装失败反馈/],
+    ['first-data-sync.html', /2～4 小时/, /强制补历史/],
+    ['asset-screening.html', /股票/, /ETF/, /可转债/, /不构成投资建议/],
+  ];
+
+  for (const [name, ...patterns] of files) {
+    const path = new URL(`../guides/${name}`, import.meta.url);
+    assert.ok(existsSync(path), `missing guides/${name}`);
+    const guide = readFileSync(path, 'utf8');
+    assert.match(guide, /rel="canonical" href="https:\/\/www\.qfo-quant-platform\.com\/guides\//);
+    assert.match(guide, /href="\.\/">返回教程中心<\/a>/);
+    for (const pattern of patterns) assert.match(guide, pattern);
+  }
+});
+
+test('lists every beginner guide in the sitemap', () => {
+  const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
+  for (const route of [
+    '/guides/',
+    '/guides/windows-install.html',
+    '/guides/first-data-sync.html',
+    '/guides/asset-screening.html',
+  ]) {
+    assert.match(sitemap, new RegExp(`<loc>https://www\\.qfo-quant-platform\\.com${route.replaceAll('.', '\\.')}`));
+  }
 });
 
 test('loads Vercel Web Analytics', () => {
