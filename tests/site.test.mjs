@@ -7,6 +7,13 @@ const css = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
 const app = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
 
+test('uses the exact Baidu HTML verification tag', () => {
+  assert.match(
+    html,
+    /<meta name="baidu-site-verification" content="codeva-jeCgWdhzDJ" \/>/,
+  );
+});
+
 test('uses current product positioning and social metadata', () => {
   assert.match(html, /<title>QFO量化回测平台 \| A股量化研究与回测工具<\/title>/);
   assert.match(html, /免费开源、本地运行的 A 股量化研究与回测平台/);
