@@ -10,7 +10,7 @@ const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url
 test('uses the exact Baidu HTML verification tag', () => {
   assert.match(
     html,
-    /<meta name="baidu-site-verification" content="codeva-iYaIDS7672" \/>/,
+    /<meta name="baidu-site-verification" content="codeva-mi0oMVNjuE" \/>/,
   );
 });
 
