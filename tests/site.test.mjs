@@ -163,6 +163,8 @@ test('publishes an upgrade data migration guide from the relevant learning paths
 test('answers version upgrade data migration from the homepage FAQ', () => {
   const faq = html.match(/<section class="section" id="faq">([\s\S]*?)<\/section>/)?.[1] || '';
   assert.match(faq, /更新到新版本后，原有数据需要重新同步吗？/);
+  assert.match(faq, /quant_data\.db-wal/);
+  assert.match(faq, /quant_data\.db-shm/);
   assert.match(faq, /href="guides\/upgrade-data-migration\.html"/);
 });
 

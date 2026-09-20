@@ -337,6 +337,7 @@ run_first_time.bat</code></pre>
                 <details>
                     <summary>更新到新版本后，原有数据需要重新同步吗？</summary>
                     <p>通常不需要。先关闭旧版和新版 QFO，将旧版本的 <code>backend/quant_data.db</code> 复制到新版本相同目录，再根据环境状态运行首次启动或快速启动脚本。迁移前请保留数据库备份。</p>
+                    <p>如果完全关闭 QFO 后仍存在 <code>quant_data.db-wal</code> 和 <code>quant_data.db-shm</code>，请与主数据库作为同一组复制，不要在程序运行中复制，也不要只复制其中一个文件。</p>
                     <p><a href="guides/upgrade-data-migration.html">查看完整的数据复制与迁移教程</a></p>
                 </details>
                 <details>
