@@ -8,7 +8,7 @@
     </url>
     <url>
         <loc>https://www.qfo-quant-platform.com/guides/</loc>
-        <lastmod>2026-08-16</lastmod>
+        <lastmod>2026-09-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -20,13 +20,19 @@
     </url>
     <url>
         <loc>https://www.qfo-quant-platform.com/guides/first-data-sync.html</loc>
-        <lastmod>2026-08-16</lastmod>
+        <lastmod>2026-09-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.qfo-quant-platform.com/guides/asset-screening.html</loc>
         <lastmod>2026-08-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.qfo-quant-platform.com/guides/upgrade-data-migration.html</loc>
+        <lastmod>2026-09-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

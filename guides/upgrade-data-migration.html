@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QFO 版本升级数据迁移教程：安全复制 quant_data.db，处理 SQLite WAL 文件，并在新版本中检查数据与同步水位。">
+    <title>更新到新版本，如何复制并迁移原有数据 | QFO 新手教程</title>
+    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/upgrade-data-migration.html">
+    <meta property="og:type" content="article"><meta property="og:title" content="更新到新版本，如何复制并迁移原有数据"><meta property="og:description" content="保留 QFO 旧版本数据库，在新版本中继续使用原有数据和同步水位。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/upgrade-data-migration.html"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
+</head>
+<body class="guide-page">
+    <header class="site-header guide-header"><a class="brand" href="../" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="./">返回教程中心</a><a href="first-data-sync.html">数据同步说明</a></nav></header>
+    <main class="guide-layout"><article>
+        <header class="guide-hero"><p class="eyebrow">Version Upgrade</p><h1>更新到新版本，如何复制并迁移原有数据</h1><p class="lead">升级 QFO 不需要重新拉取全部历史数据。先停止旧版和新版，再把旧数据库复制到新版后端目录。</p></header>
+        <div class="guide-content">
+            <div class="guide-callout"><p><strong>核心原则：</strong>旧版和新版 QFO 必须完全停止运行，数据库必须在新版后端首次启动前复制到位。</p></div>
+            <h2>一、迁移前准备</h2>
+            <ol><li>关闭旧版和新版 QFO 的所有窗口，确认 Python、Node.js 和 QFO 后端均已停止。</li><li>下载并完整解压最新稳定版，不要直接覆盖旧版本文件夹。</li><li>保留旧版本目录和数据库备份，确认迁移成功后再自行归档。</li></ol>
+            <h2>二、复制数据库</h2>
+            <ol><li>在旧版本中找到 <code>backend/quant_data.db</code>。</li><li>如果新版本的 <code>backend/</code> 已有同名数据库，先备份。</li><li>将旧版数据库复制到新版目录，最终路径必须是 <code>backend/quant_data.db</code>。</li></ol>
+            <h2>三、选择正确的启动脚本</h2>
+            <table><thead><tr><th>新版本目录状态</th><th>启动方式</th></tr></thead><tbody><tr><td>新下载，尚未安装 Python 和 Node.js 依赖</td><td>运行 <code>run_first_time.bat</code></td></tr><tr><td>已经完成依赖安装</td><td>运行 <code>run_quick_start.bat</code></td></tr></tbody></table>
+            <h2>四、如果存在 WAL 文件</h2>
+            <p>正常关闭 QFO 后，通常只需复制 <code>quant_data.db</code>。如果仍然存在 <code>quant_data.db-wal</code> 或 <code>quant_data.db-shm</code>，不要在数据库写入过程中复制，也不要只复制其中一个文件。先确认所有相关进程已经停止，再将数据库相关文件作为同一组处理。</p>
+            <div class="guide-callout warning"><p><code>quant_data.db-wal</code> 可能包含尚未写回主数据库的数据；<code>quant_data.db-shm</code> 通常可以由 SQLite 重新生成。</p></div>
+            <h2>五、迁移后检查</h2>
+            <ol><li>进入数据中台，检查最新日期、数据量和同步水位。</li><li>执行一次日常增量同步，确认旧数据可以继续更新。</li><li>Token、API Key 不保存在数据库中，如有需要请在设置页重新填写。</li></ol>
+            <p>建议迁移到相同版本或更新的稳定版本，不要把新版本数据库复制回旧版本程序。</p>
+            <div class="guide-actions"><a class="button primary" href="first-data-sync.html">查看数据同步说明</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E4%BD%BF%E7%94%A8%E4%BA%A4%E6%B5%81" target="_blank" rel="noopener noreferrer">迁移问题交流</a></div>
+        </div>
+    </article><p class="guide-footer">迁移前请保留数据库备份，并确保复制过程中没有程序正在写入数据库。</p></main>
+</body>
+</html>

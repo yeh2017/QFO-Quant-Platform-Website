@@ -127,7 +127,7 @@ test('publishes a beginner guide hub and links it from the homepage', () => {
   assert.match(guides, /股票、ETF、可转债筛选有什么区别/);
 });
 
-test('publishes three focused and cross-linked beginner guides', () => {
+test('publishes focused and cross-linked beginner guides', () => {
   const files = [
     ['windows-install.html', /run_first_time\.bat/, /安装失败反馈/],
     ['first-data-sync.html', /2～4 小时/, /强制补历史/],
@@ -144,6 +144,22 @@ test('publishes three focused and cross-linked beginner guides', () => {
   }
 });
 
+test('publishes an upgrade data migration guide from the relevant learning paths', () => {
+  const path = new URL('../guides/upgrade-data-migration.html', import.meta.url);
+  assert.ok(existsSync(path), 'missing guides/upgrade-data-migration.html');
+
+  const guide = readFileSync(path, 'utf8');
+  const guides = readFileSync(new URL('../guides/index.html', import.meta.url), 'utf8');
+  const syncGuide = readFileSync(new URL('../guides/first-data-sync.html', import.meta.url), 'utf8');
+
+  assert.match(guide, /更新到新版本，如何复制并迁移原有数据/);
+  assert.match(guide, /backend\/quant_data\.db/);
+  assert.match(guide, /run_first_time\.bat/);
+  assert.match(guide, /run_quick_start\.bat/);
+  assert.match(guides, /href="upgrade-data-migration\.html"/);
+  assert.match(syncGuide, /href="upgrade-data-migration\.html"/);
+});
+
 test('lists every beginner guide in the sitemap', () => {
   const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
   for (const route of [
@@ -151,6 +167,7 @@ test('lists every beginner guide in the sitemap', () => {
     '/guides/windows-install.html',
     '/guides/first-data-sync.html',
     '/guides/asset-screening.html',
+    '/guides/upgrade-data-migration.html',
   ]) {
     assert.match(sitemap, new RegExp(`<loc>https://www\\.qfo-quant-platform\\.com${route.replaceAll('.', '\\.')}`));
   }
