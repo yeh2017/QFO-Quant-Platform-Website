@@ -4,12 +4,12 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="解释 QFO 首次数据同步为什么需要 2～4 小时，以及增量同步、财务数据、数据库水位和强制补历史的区别。">
     <title>首次数据同步为什么需要 2～4 小时 | QFO 新手教程</title>
-    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/first-data-sync.html">
-    <meta property="og:type" content="article"><meta property="og:title" content="首次数据同步为什么需要 2～4 小时"><meta property="og:description" content="理解 QFO 首次建仓、增量同步、财务慢接口和强制补历史。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/first-data-sync.html"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
+    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/first-data-sync">
+    <meta property="og:type" content="article"><meta property="og:title" content="首次数据同步为什么需要 2～4 小时"><meta property="og:description" content="理解 QFO 首次建仓、增量同步、财务慢接口和强制补历史。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/first-data-sync"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
 </head>
 <body class="guide-page">
-    <header class="site-header guide-header"><a class="brand" href="../" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="./">返回教程中心</a><a href="asset-screening.html">下一篇：资产筛选</a></nav></header>
+    <header class="site-header guide-header"><a class="brand" href="/" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="/guides">返回教程中心</a><a href="/guides/asset-screening">下一篇：资产筛选</a></nav></header>
     <main class="guide-layout"><article>
         <header class="guide-hero"><p class="eyebrow">Data Sync</p><h1>首次数据同步为什么需要 2～4 小时</h1><p class="lead">首次同步是在本地建立历史数据库；日常同步只更新缺少的日期，两者工作量完全不同。</p></header>
         <div class="guide-content">
@@ -22,7 +22,7 @@
             <h2>什么时候使用“强制补历史”</h2>
             <div class="guide-callout warning"><p><strong>强制补历史（忽略水位全量重拉）</strong>适合首次建仓、修复历史缺口或主动重建数据库，不建议每天勾选。它会绕过现有水位，从设置的开始日期重新请求数据。</p></div>
             <h2>更新版本时需要重新同步吗</h2>
-            <p>通常不需要。可以先停止旧版和新版 QFO，再把原有数据库复制到新版本。具体步骤请看：<a href="upgrade-data-migration.html">更新到新版本，如何复制并迁移原有数据</a>。</p>
+            <p>通常不需要。可以先停止旧版和新版 QFO，再把原有数据库复制到新版本。具体步骤请看：<a href="/guides/upgrade-data-migration">更新到新版本，如何复制并迁移原有数据</a>。</p>
             <h2>财务日期为什么不是今天</h2>
             <p>“财务报表最新 2026-06-30”一类日期是季报或中报的报告期日期，不是同步当天日期。财报按季度披露，天然存在滞后。如果日志显示“财务数据：跳过”，本次同步不会消耗财报拉取时间。</p>
             <h2>看起来卡住时怎么判断</h2>

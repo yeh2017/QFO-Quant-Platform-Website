@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="QFO 版本升级数据迁移教程：安全复制 quant_data.db，处理 SQLite WAL 文件，并在新版本中检查数据与同步水位。">
     <title>更新到新版本，如何复制并迁移原有数据 | QFO 新手教程</title>
-    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/upgrade-data-migration.html">
-    <meta property="og:type" content="article"><meta property="og:title" content="更新到新版本，如何复制并迁移原有数据"><meta property="og:description" content="保留 QFO 旧版本数据库，在新版本中继续使用原有数据和同步水位。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/upgrade-data-migration.html"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
+    <link rel="canonical" href="https://www.qfo-quant-platform.com/guides/upgrade-data-migration">
+    <meta property="og:type" content="article"><meta property="og:title" content="更新到新版本，如何复制并迁移原有数据"><meta property="og:description" content="保留 QFO 旧版本数据库，在新版本中继续使用原有数据和同步水位。"><meta property="og:url" content="https://www.qfo-quant-platform.com/guides/upgrade-data-migration"><meta property="og:image" content="https://www.qfo-quant-platform.com/assets/qfo-share.webp">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css">
 </head>
 <body class="guide-page">
-    <header class="site-header guide-header"><a class="brand" href="../" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="./">返回教程中心</a><a href="first-data-sync.html">数据同步说明</a></nav></header>
+    <header class="site-header guide-header"><a class="brand" href="/" aria-label="返回 QFO 首页"><span class="brand-mark">QFO</span><strong>QFO量化回测平台</strong></a><nav class="top-nav" aria-label="教程导航"><a href="/guides">返回教程中心</a><a href="/guides/first-data-sync">数据同步说明</a></nav></header>
     <main class="guide-layout"><article>
         <header class="guide-hero"><p class="eyebrow">Version Upgrade</p><h1>更新到新版本，如何复制并迁移原有数据</h1><p class="lead">升级 QFO 不需要重新拉取全部历史数据。先停止旧版和新版，再把旧数据库复制到新版后端目录。</p></header>
         <div class="guide-content">
@@ -27,7 +27,7 @@
             <h2>五、迁移后检查</h2>
             <ol><li>进入数据中台，检查最新日期、数据量和同步水位。</li><li>执行一次日常增量同步，确认旧数据可以继续更新。</li><li>Token、API Key 不保存在数据库中，如有需要请在设置页重新填写。</li></ol>
             <p>建议迁移到相同版本或更新的稳定版本，不要把新版本数据库复制回旧版本程序。</p>
-            <div class="guide-actions"><a class="button primary" href="first-data-sync.html">查看数据同步说明</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E4%BD%BF%E7%94%A8%E4%BA%A4%E6%B5%81" target="_blank" rel="noopener noreferrer">迁移问题交流</a></div>
+            <div class="guide-actions"><a class="button primary" href="/guides/first-data-sync">查看数据同步说明</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E4%BD%BF%E7%94%A8%E4%BA%A4%E6%B5%81" target="_blank" rel="noopener noreferrer">迁移问题交流</a></div>
         </div>
     </article><p class="guide-footer">迁移前请保留数据库备份，并确保复制过程中没有程序正在写入数据库。</p></main>
 </body>
