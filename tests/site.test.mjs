@@ -53,15 +53,15 @@ test('keeps the primary actions and embeds the project demo without a duplicate 
   assert.ok(existsSync(new URL('../assets/videos/qfo-project-demo.mp4', import.meta.url)));
 });
 
-test('uses a concise top navigation with direct download, questions, and accessible resources', () => {
+test('uses a concise top navigation with a direct independent tools entry', () => {
   const nav = html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
-  for (const label of ['首页', '教程', '视频', '下载', '问答', '资源']) {
+  for (const label of ['首页', '教程', '项目演示', '下载', '问答', '开源工具']) {
     assert.match(nav, new RegExp(`>${label}<`));
   }
   assert.match(nav, /data-release-download/);
   assert.match(nav, /QFO-Quant-Platform\/discussions/);
-  assert.match(nav, /<details class="resource-menu">/);
-  assert.match(nav, /href="tools\/zh">作者的其他开源工具<\/a>/);
+  assert.match(nav, /href="tools\/zh">开源工具<\/a>/);
+  assert.doesNotMatch(nav, /resource-menu|>资源</);
 });
 
 test('offers a stable release download', () => {
@@ -70,16 +70,25 @@ test('offers a stable release download', () => {
   assert.doesNotMatch(html, />v1\.0\.0</);
 });
 
-test('links the tools directory without mixing independent tools into QFO downloads', () => {
+test('shows one concrete independent tool after QFO feedback without mixing downloads', () => {
   const noticeIndex = html.indexOf('id="notice"');
   const toolIndex = html.indexOf('id="other-tools"');
   const contactIndex = html.indexOf('id="contact"');
-  assert.ok(noticeIndex < toolIndex && toolIndex < contactIndex);
+  assert.ok(noticeIndex < contactIndex && contactIndex < toolIndex);
 
-  const section = html.match(/<section class="section" id="other-tools">([\s\S]*?)<\/section>/)?.[1] || '';
-  assert.match(section, /作者的其他开源工具/);
+  const section = html.match(/<aside class="independent-tool" id="other-tools"[^>]*>([\s\S]*?)<\/aside>/)?.[1] || '';
+  assert.match(section, /ChatGPT\/Codex 本地历史记录清理工具/);
+  assert.match(section, /独立项目/);
+  assert.match(section, /与 QFO 无关/);
+  assert.match(section, /chatgpt-codex-local-history-cleanup-tool"/);
+  assert.match(section, /chatgpt-codex-local-history-cleanup-tool\/releases\/latest/);
   assert.match(section, /href="tools\/zh"/);
-  assert.doesNotMatch(section, /releases\/latest/);
+});
+
+test('keeps the side navigation focused on QFO content', () => {
+  const nav = html.match(/<aside class="side-nav"[^>]*>([\s\S]*?)<\/aside>/)?.[1] || '';
+  assert.match(nav, />QFO 总览</);
+  assert.doesNotMatch(nav, /开源工具|other-tools/);
 });
 
 test('publishes English-default and Chinese tools pages with visible complete tool cards', () => {
