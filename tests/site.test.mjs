@@ -8,6 +8,7 @@ const app = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
 const toolsEnPath = new URL('../tools/index.html', import.meta.url);
 const toolsZhPath = new URL('../tools/zh.html', import.meta.url);
+const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
 
 test('uses the exact Baidu HTML verification tag', () => {
   assert.match(
@@ -60,7 +61,7 @@ test('uses a concise top navigation with a direct independent tools entry', () =
   }
   assert.match(nav, /data-release-download/);
   assert.match(nav, /QFO-Quant-Platform\/discussions/);
-  assert.match(nav, /href="tools\/zh">开源工具<\/a>/);
+  assert.match(nav, /href="tools">开源工具<\/a>/);
   assert.doesNotMatch(nav, /resource-menu|>资源</);
 });
 
@@ -70,19 +71,23 @@ test('offers a stable release download', () => {
   assert.doesNotMatch(html, />v1\.0\.0</);
 });
 
-test('shows one concrete independent tool after QFO feedback without mixing downloads', () => {
-  const noticeIndex = html.indexOf('id="notice"');
+test('shows one concrete independent tool between the header and QFO content without mixing downloads', () => {
+  const headerIndex = html.indexOf('<header class="site-header">');
   const toolIndex = html.indexOf('id="other-tools"');
-  const contactIndex = html.indexOf('id="contact"');
-  assert.ok(noticeIndex < contactIndex && contactIndex < toolIndex);
+  const layoutIndex = html.indexOf('<div class="layout" id="top">');
+  assert.ok(headerIndex < toolIndex && toolIndex < layoutIndex);
 
-  const section = html.match(/<aside class="independent-tool" id="other-tools"[^>]*>([\s\S]*?)<\/aside>/)?.[1] || '';
+  const section = html.match(/<section class="independent-tools-showcase" id="other-tools"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
   assert.match(section, /ChatGPT\/Codex 本地历史记录清理工具/);
+  assert.match(section, /class="independent-tool-title"/);
+  assert.doesNotMatch(section, /<h[1-6][^>]*>ChatGPT\/Codex 本地历史记录清理工具/);
   assert.match(section, /独立项目/);
   assert.match(section, /与 QFO 无关/);
   assert.match(section, /chatgpt-codex-local-history-cleanup-tool"/);
   assert.match(section, /chatgpt-codex-local-history-cleanup-tool\/releases\/latest/);
-  assert.match(section, /href="tools\/zh"/);
+  assert.match(section, /href="tools">浏览全部开源工具<\/a>/);
+  assert.doesNotMatch(section, /作者/);
+  assert.ok(html.indexOf('<h1>') < html.indexOf('<h2'));
 });
 
 test('keeps the side navigation focused on QFO content', () => {
@@ -112,6 +117,9 @@ test('publishes English-default and Chinese tools pages with visible complete to
   }
   assert.match(toolsEn, /Independent open-source project/);
   assert.match(toolsZh, /独立开源项目，与 QFO 功能和数据无关/);
+  assert.match(toolsEn, /<h1>Independent Open-source Tools<\/h1>/);
+  assert.match(toolsZh, /<h1>独立开源工具<\/h1>/);
+  assert.doesNotMatch(toolsZh, /作者/);
 });
 
 test('routes user questions to Discussions and reproducible bugs to Issue Forms', () => {
@@ -135,6 +143,7 @@ test('contains mobile overflow protections', () => {
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.side-nav\s*{[^}]*display:\s*none/s);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.hero-actions\s*{[^}]*flex-wrap:\s*wrap/s);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.guide-content table\s*{[^}]*display:\s*block[^}]*overflow-x:\s*auto/s);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.tool-list\s*{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
 });
 
 test('sizes images and lazily loads preview media', () => {
@@ -244,6 +253,15 @@ test('lists only final 200 URLs, including both tools languages, in the sitemap'
     assert.match(sitemap, new RegExp(`<loc>https://www\\.qfo-quant-platform\\.com${route.replaceAll('.', '\\.')}`));
   }
   assert.doesNotMatch(sitemap, /<loc>[^<]+\.html<\/loc>|<loc>https:\/\/www\.qfo-quant-platform\.com\/guides\/<\/loc>/);
+  for (const route of ['/', '/tools', '/tools/zh']) {
+    const escapedRoute = route.replaceAll('/', '\\/');
+    assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.qfo-quant-platform\\.com${escapedRoute}<\\/loc>[\\s\\S]*?<lastmod>2026-09-25<\\/lastmod>`));
+  }
+});
+
+test('uses neutral open-source tools wording in repository documentation', () => {
+  assert.match(readme, /- 开源工具：/);
+  assert.doesNotMatch(readme, /作者的其他开源工具/);
 });
 
 test('loads Vercel Web Analytics', () => {
