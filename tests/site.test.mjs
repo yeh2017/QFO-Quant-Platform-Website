@@ -322,10 +322,11 @@ test('lists only final 200 URLs, including both tools languages, in the sitemap'
     assert.match(sitemap, new RegExp(`<loc>https://www\\.qfo-quant-platform\\.com${route.replaceAll('.', '\\.')}`));
   }
   assert.doesNotMatch(sitemap, /<loc>[^<]+\.html<\/loc>|<loc>https:\/\/www\.qfo-quant-platform\.com\/guides\/<\/loc>/);
-  for (const route of ['/', '/tools', '/tools/zh']) {
+  for (const route of ['/tools', '/tools/zh']) {
     const escapedRoute = route.replaceAll('/', '\\/');
     assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.qfo-quant-platform\\.com${escapedRoute}<\\/loc>[\\s\\S]*?<lastmod>2026-09-25<\\/lastmod>`));
   }
+  assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>[\s\S]*?<lastmod>2026-09-26<\/lastmod>/);
 });
 
 test('uses neutral open-source tools wording in repository documentation', () => {
