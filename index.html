@@ -61,21 +61,27 @@
         <div class="independent-tools-showcase-inner">
             <div class="independent-tools-showcase-head">
                 <p class="independent-tool-kicker">Independent Open-source Tool</p>
-                <a class="text-link" href="tools">浏览全部开源工具</a>
+                <div class="independent-tool-head-actions">
+                    <div class="tool-language-switch" role="group" aria-label="Tool language / 工具语言">
+                        <button type="button" data-tool-language="en" aria-pressed="true">English</button>
+                        <button type="button" data-tool-language="zh" aria-pressed="false">中文</button>
+                    </div>
+                    <a class="text-link" href="tools" data-tool-en="View all open-source tools" data-tool-zh="查看全部开源工具" data-tool-href-en="tools" data-tool-href-zh="tools/zh">View all open-source tools</a>
+                </div>
             </div>
             <article class="independent-tool">
                 <div class="independent-tool-copy">
-                    <p class="independent-tool-title" id="independent-tool-title">ChatGPT/Codex 本地历史记录清理工具</p>
-                    <p>面向 Windows 10/11 的本地维护工具，用于扫描、备份、恢复和清理 Codex 桌面应用的本地历史记录。执行清理前会创建并校验备份。</p>
+                    <p class="independent-tool-title" id="independent-tool-title" data-tool-en="ChatGPT/Codex Local History Cleanup Tool" data-tool-zh="ChatGPT/Codex 本地历史记录清理工具">ChatGPT/Codex Local History Cleanup Tool</p>
+                    <p data-tool-en="A local maintenance tool for Windows 10/11 that scans, backs up, restores, and cleans local history from the Codex desktop app. It creates and verifies a backup before cleanup." data-tool-zh="面向 Windows 10/11 的本地维护工具，用于扫描、备份、恢复和清理 Codex 桌面应用的本地历史记录。执行清理前会创建并校验备份。">A local maintenance tool for Windows 10/11 that scans, backs up, restores, and cleans local history from the Codex desktop app. It creates and verifies a backup before cleanup.</p>
                     <div class="independent-tool-tags" aria-label="工具属性">
-                        <span>独立项目</span>
-                        <span>本地运行</span>
-                        <span>与 QFO 无关</span>
+                        <span data-tool-en="Independent project" data-tool-zh="独立项目">Independent project</span>
+                        <span data-tool-en="Runs locally" data-tool-zh="本地运行">Runs locally</span>
+                        <span data-tool-en="Separate from QFO" data-tool-zh="与 QFO 无关">Separate from QFO</span>
                     </div>
                 </div>
                 <div class="independent-tool-actions">
-                    <a class="button" href="https://github.com/yeh2017/chatgpt-codex-local-history-cleanup-tool" target="_blank" rel="noopener noreferrer">查看 GitHub</a>
-                    <a class="button" href="https://github.com/yeh2017/chatgpt-codex-local-history-cleanup-tool/releases/latest" target="_blank" rel="noopener noreferrer">下载 Windows 版</a>
+                    <a class="button" href="https://github.com/yeh2017/chatgpt-codex-local-history-cleanup-tool" target="_blank" rel="noopener noreferrer" data-tool-en="View on GitHub" data-tool-zh="查看 GitHub">View on GitHub</a>
+                    <a class="button" href="https://github.com/yeh2017/chatgpt-codex-local-history-cleanup-tool/releases/latest" target="_blank" rel="noopener noreferrer" data-tool-en="Download for Windows" data-tool-zh="下载 Windows 版">Download for Windows</a>
                 </div>
             </article>
         </div>
@@ -440,7 +446,7 @@ run_first_time.bat</code></pre>
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite">已复制</div>
-    <script src="app.js"></script>
+    <script src="app.js?v=20260926"></script>
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>

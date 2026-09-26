@@ -1,9 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
+    initOpenSourceToolLanguage();
     initActiveNav();
     initCopyButtons();
     initSandbox();
     initLatestRelease();
 });
+
+function initOpenSourceToolLanguage() {
+    const buttons = Array.from(document.querySelectorAll("[data-tool-language]"));
+    const content = Array.from(document.querySelectorAll("[data-tool-en]"));
+    if (!buttons.length || !content.length) return;
+
+    const setLanguage = (language) => {
+        const key = language === "zh" ? "toolZh" : "toolEn";
+        const hrefKey = language === "zh" ? "toolHrefZh" : "toolHrefEn";
+
+        content.forEach((element) => {
+            element.textContent = element.dataset[key];
+            if (element.dataset[hrefKey]) element.href = element.dataset[hrefKey];
+        });
+        buttons.forEach((button) => {
+            const isActive = button.dataset.toolLanguage === language;
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
+    };
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => setLanguage(button.dataset.toolLanguage));
+    });
+    setLanguage("en");
+}
 
 async function initLatestRelease() {
     const endpoint = "https://api.github.com/repos/yeh2017/QFO-Quant-Platform/releases/latest";

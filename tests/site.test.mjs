@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
+import vm from 'node:vm';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
@@ -85,9 +86,77 @@ test('shows one concrete independent tool between the header and QFO content wit
   assert.match(section, /与 QFO 无关/);
   assert.match(section, /chatgpt-codex-local-history-cleanup-tool"/);
   assert.match(section, /chatgpt-codex-local-history-cleanup-tool\/releases\/latest/);
-  assert.match(section, /href="tools">浏览全部开源工具<\/a>/);
+  assert.match(section, /href="tools"[^>]+data-tool-href-zh="tools\/zh"[^>]*>View all open-source tools<\/a>/);
   assert.doesNotMatch(section, /作者/);
   assert.ok(html.indexOf('<h1>') < html.indexOf('<h2'));
+});
+
+test('defaults the homepage open-source tool card to English and switches the complete card to Chinese', () => {
+  const listeners = new Map();
+  const makeClassList = () => ({
+    active: new Set(),
+    toggle(name, enabled) {
+      if (enabled) this.active.add(name);
+      else this.active.delete(name);
+    },
+  });
+  const buttons = [
+    {
+      dataset: { toolLanguage: 'en' },
+      classList: makeClassList(),
+      setAttribute(name, value) { this[name] = value; },
+      addEventListener(type, handler) { listeners.set(`en:${type}`, handler); },
+    },
+    {
+      dataset: { toolLanguage: 'zh' },
+      classList: makeClassList(),
+      setAttribute(name, value) { this[name] = value; },
+      addEventListener(type, handler) { listeners.set(`zh:${type}`, handler); },
+    },
+  ];
+  const title = {
+    dataset: {
+      toolEn: 'ChatGPT/Codex Local History Cleanup Tool',
+      toolZh: 'ChatGPT/Codex 本地历史记录清理工具',
+    },
+    textContent: '',
+  };
+  const allTools = {
+    dataset: {
+      toolEn: 'View all open-source tools',
+      toolZh: '查看全部开源工具',
+      toolHrefEn: 'tools',
+      toolHrefZh: 'tools/zh',
+    },
+    textContent: '',
+    href: '',
+  };
+  const document = {
+    addEventListener() {},
+    querySelectorAll(selector) {
+      if (selector === '[data-tool-language]') return buttons;
+      if (selector === '[data-tool-en]') return [title, allTools];
+      return [];
+    },
+  };
+  const context = vm.createContext({ document, window: { clearTimeout() {}, setTimeout() {} } });
+  vm.runInContext(app, context);
+
+  context.initOpenSourceToolLanguage();
+  assert.equal(title.textContent, 'ChatGPT/Codex Local History Cleanup Tool');
+  assert.equal(allTools.textContent, 'View all open-source tools');
+  assert.equal(allTools.href, 'tools');
+  assert.equal(buttons[0]['aria-pressed'], 'true');
+
+  listeners.get('zh:click')();
+  assert.equal(title.textContent, 'ChatGPT/Codex 本地历史记录清理工具');
+  assert.equal(allTools.textContent, '查看全部开源工具');
+  assert.equal(allTools.href, 'tools/zh');
+  assert.equal(buttons[1]['aria-pressed'], 'true');
+});
+
+test('versions the homepage script so deployments do not reuse stale language behavior', () => {
+  assert.match(html, /<script src="app\.js\?v=20260926"><\/script>/);
 });
 
 test('keeps the side navigation focused on QFO content', () => {
