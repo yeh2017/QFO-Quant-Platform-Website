@@ -31,7 +31,7 @@
         "description": "免费开源、本地运行的 A 股量化研究与回测平台，帮助量化新手完成数据同步、选股、策略回测和风险分析。",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Windows 10/11",
-        "softwareVersion": "latest",
+        "softwareVersion": "1.0.3",
         "url": "https://www.qfo-quant-platform.com/",
         "downloadUrl": "https://github.com/yeh2017/QFO-Quant-Platform/releases/latest/download/QFO-Quant-Platform.zip",
         "codeRepository": "https://github.com/yeh2017/QFO-Quant-Platform",
@@ -164,7 +164,7 @@
                 <div class="notice-inline">
                     <h3>Windows 用户</h3>
                     <ol>
-                        <li><strong>下载</strong>：<a href="https://github.com/yeh2017/QFO-Quant-Platform/releases/latest/download/QFO-Quant-Platform.zip" data-release-download>直接下载 <span data-release-tag>v1.0.2</span> 稳定版安装包</a></li>
+                        <li><strong>下载</strong>：<a href="https://github.com/yeh2017/QFO-Quant-Platform/releases/latest/download/QFO-Quant-Platform.zip" data-release-download>直接下载 <span data-release-tag>v1.0.3</span> 稳定版安装包</a></li>
                         <li><strong>解压</strong>：将压缩包解压到一个<strong>不包含中文、空格</strong>的路径下，例如 <code>D:\QFO</code>。</li>
                         <li><strong>运行</strong>：双击文件夹内的 <strong><code>run_first_time.bat</code></strong> 启动；日常快速启动使用 <strong><code>run_quick_start.bat</code></strong>。</li>
                     </ol>
@@ -226,7 +226,7 @@ run_first_time.bat</code></pre>
                     <article>
                         <span>Step 1</span>
                         <h3>准备环境</h3>
-                        <p>安装 Python 3.12+、Node.js 18+ 和 Git，并准备自己的 <a href="https://tushare.pro/document/1?doc_id=39" target="_blank" rel="noopener noreferrer">Tushare Token（获取链接）</a>。</p>
+                        <p>安装 Python 3.12+、Node.js 22.12+，并准备自己的 <a href="https://tushare.pro/document/1?doc_id=39" target="_blank" rel="noopener noreferrer">Tushare Token（获取链接）</a>。使用 Git 克隆源码时还需安装 Git。</p>
                     </article>
                     <article>
                         <span>Step 2</span>
@@ -364,6 +364,11 @@ run_first_time.bat</code></pre>
                     <p>首次同步耗时取决于本地是否已有数据库水位、是否勾选“强制补历史（忽略水位全量重拉）”、Tushare 积分额度和网络稳定性。</p>
                     <p>日常已有水位的增量同步，约 2 分钟属于正常且很快的水平；最新季报或中报财务数据单独拉取，通常需要 30 分钟到 50 分钟；空库首次建仓或强制补历史数据，通常需要 2 到 4 小时。</p>
                     <p>“财务报表最新 2026-06-30”这类日期是正常的季报或中报报告期日期，不是同步当天日期。强制补历史适合首次建仓、修复缺口或主动重建数据库，不建议作为每天常规同步方式。</p>
+                </details>
+                <details>
+                    <summary>从其他电脑复制项目后，为什么不能启动？</summary>
+                    <p>源码和数据库可以迁移，但 Python 虚拟环境与前端依赖可能包含原电脑的路径。建议重新下载稳定版，按迁移教程复制数据库，再运行 <code>run_first_time.bat</code>，由本机创建运行环境。v1.0.3 会检查 Python 版本，并以 UTF-8 安装依赖。</p>
+                    <p>旧版遇到 <code>UnicodeDecodeError: 'gbk'</code> 时，请升级到 v1.0.3。多版本 Python、npm 提示及启动日志的处理见<a href="/guides/windows-install">Windows 安装与常见错误</a>。</p>
                 </details>
                 <details>
                     <summary>更新到新版本后，原有数据需要重新同步吗？</summary>

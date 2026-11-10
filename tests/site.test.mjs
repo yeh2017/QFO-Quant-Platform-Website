@@ -29,7 +29,7 @@ test('uses current product positioning and social metadata', () => {
   const structuredData = JSON.parse(
     html.match(/<script[^>]+type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] || '',
   );
-  assert.equal(structuredData.softwareVersion, 'latest');
+  assert.match(structuredData.softwareVersion, /^\d+\.\d+\.\d+$/);
   assert.match(structuredData.downloadUrl, /releases\/latest\/download\/QFO-Quant-Platform\.zip/);
   assert.doesNotMatch(html, /教学网站|组合风控|智能选股与因子/);
 });
@@ -326,7 +326,7 @@ test('lists only final 200 URLs, including both tools languages, in the sitemap'
     const escapedRoute = route.replaceAll('/', '\\/');
     assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.qfo-quant-platform\\.com${escapedRoute}<\\/loc>[\\s\\S]*?<lastmod>2026-09-25<\\/lastmod>`));
   }
-  assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>[\s\S]*?<lastmod>2026-09-26<\/lastmod>/);
+  assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>[\s\S]*?<lastmod>2026-11-10<\/lastmod>/);
 });
 
 test('uses neutral open-source tools wording in repository documentation', () => {
