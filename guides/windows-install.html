@@ -24,10 +24,11 @@
                 <table><thead><tr><th>现象</th><th>原因与处理</th></tr></thead><tbody>
                     <tr><td>Python not found</td><td>重新安装 Python 3.12+，勾选 Add Python to PATH；安装后关闭并重新打开启动窗口。</td></tr>
                     <tr><td>Node.js 不存在或版本过低</td><td>安装 Node.js 22.12+，完成后重新运行首次启动脚本。</td></tr>
-                    <tr><td>电脑安装了多个 Python</td><td>v1.0.3 会优先使用有效的本地虚拟环境，再通过 Python 启动器和 PATH 寻找 Python 3.12+。检查启动窗口显示的实际解释器路径。</td></tr>
-                    <tr><td>UnicodeDecodeError: 'gbk'</td><td>旧 pip 按 GBK 读取 UTF-8 依赖文件。升级到 v1.0.3，使用修复后的 UTF-8 安装流程；单纯更换镜像不能修复编码错误。</td></tr>
+                    <tr><td>电脑安装了多个 Python</td><td>从 v1.0.3 起，脚本会优先使用有效的本地虚拟环境，再通过 Python 启动器和 PATH 寻找 Python 3.12+。检查启动窗口显示的实际解释器路径。</td></tr>
+                    <tr><td>UnicodeDecodeError: 'gbk'</td><td>旧 pip 按 GBK 读取 UTF-8 依赖文件。升级到最新稳定版，使用修复后的 UTF-8 安装流程；单纯更换镜像不能修复编码错误。</td></tr>
                     <tr><td>funding 或 vulnerabilities 提示</td><td>funding 是赞助提示，不影响启动；vulnerabilities 是依赖审计结果，需要评估。不要直接运行 npm audit fix --force；使用最新稳定版并保留完整审计输出反馈。</td></tr>
                     <tr><td>依赖下载很慢或失败</td><td>通常是网络连接或软件源临时异常。保持项目文件不动，网络恢复后再次运行 <code>run_first_time.bat</code>。</td></tr>
+                    <tr><td><code>Failed to resolve</code> 或 <code>getaddrinfo failed</code></td><td>安装时无法解析软件源域名。从 v1.0.4 起，脚本依次尝试阿里云、腾讯云和官方 PyPI。若都失败，先检查网络和 DNS，或切换到手机热点，再从原目录运行 <code>run_first_time.bat</code>。不必先删除虚拟环境或数据库。</td></tr>
                     <tr><td>双击后窗口立即关闭</td><td>确认文件已经完整解压；在文件夹地址栏输入 <code>cmd</code>，再运行脚本以保留错误信息。</td></tr>
                     <tr><td>页面打开但没有数据</td><td>安装已经完成。进入设置页填写自己的 Tushare Token，再到数据中台执行同步。</td></tr>
                     <tr><td>端口被占用</td><td>关闭此前启动的 QFO、Python 或 Node.js 窗口，然后重新启动；不要同时运行多份项目。</td></tr>
