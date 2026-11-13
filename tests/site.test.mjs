@@ -326,7 +326,7 @@ test('lists only final 200 URLs, including both tools languages, in the sitemap'
     const escapedRoute = route.replaceAll('/', '\\/');
     assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.qfo-quant-platform\\.com${escapedRoute}<\\/loc>[\\s\\S]*?<lastmod>2026-09-25<\\/lastmod>`));
   }
-  assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>[\s\S]*?<lastmod>2026-11-10<\/lastmod>/);
+  assert.match(sitemap, /<loc>https:\/\/www\.qfo-quant-platform\.com\/<\/loc>[\s\S]*?<lastmod>2026-11-13<\/lastmod>/);
 });
 
 test('uses neutral open-source tools wording in repository documentation', () => {
@@ -353,6 +353,19 @@ test('updates download links from the latest GitHub release', () => {
   assert.match(app, /browser_download_url/);
   assert.match(app, /zipball_url/);
   assert.match(app, /initLatestRelease\(\)/);
+});
+
+test('shows v1.0.5 and its cumulative updates without requiring the GitHub API', () => {
+  assert.match(html, /"softwareVersion": "1\.0\.5"/);
+  assert.match(html, /data-release-tag>v1\.0\.5<\/span>/);
+  assert.match(html, /data-release-date[^>]*>2026-11-13<\/time>/);
+  for (const text of ['v1.0.3', 'v1.0.4', '退市', '财务', '因子', '首次启动', '快速启动', '1.18.91']) {
+    assert.ok(html.includes(text), `missing release detail: ${text}`);
+  }
+  const guide = readFileSync(new URL('../guides/windows-install.html', import.meta.url), 'utf8');
+  for (const text of ['QFO Backend', 'QFO Frontend', '[WAIT]', '[OK]', '[FAIL]', 'http://localhost:8000', 'http://localhost:3000']) {
+    assert.ok(guide.includes(text), `missing launcher guidance: ${text}`);
+  }
 });
 
 test('sets baseline security headers on every route', () => {

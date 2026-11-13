@@ -20,6 +20,8 @@
                 <h2>二、正确下载与解压</h2>
                 <ol><li>从 QFO 最新 Release 下载稳定版 ZIP。</li><li>完整解压到独立文件夹，不要直接在压缩包预览窗口中运行。</li><li>优先使用不含中文、空格和特殊符号的短路径，例如 <code>D:\QFO</code>。</li></ol>
                 <div class="guide-callout"><p><strong>首次运行：</strong>双击 <code>run_first_time.bat</code>。它会检查环境、创建 Python 虚拟环境、安装前后端依赖并启动服务。安装完成后的日常启动使用 <code>run_quick_start.bat</code>。</p></div>
+                <p><strong>v1.0.5 启动方式：</strong>首次启动负责安装与检查；快速启动只启动服务，缺少环境时会提示先运行首次启动，不自动安装。后端地址为 <code>http://localhost:8000</code>，前端地址为 <code>http://localhost:3000</code>。</p>
+                <p>使用期间保持 <strong>QFO Backend</strong> 和 <strong>QFO Frontend</strong> 两个日志窗口打开，启动器窗口可以关闭。<code>[WAIT]</code> 表示正在等待，<code>[OK]</code> 表示服务已响应，<code>[FAIL]</code> 表示启动失败；后端最多检查 30 次、前端 20 次，就绪后立即继续，并非固定等待 30／20 秒。</p>
                 <h2>三、常见错误与处理</h2>
                 <table><thead><tr><th>现象</th><th>原因与处理</th></tr></thead><tbody>
                     <tr><td>Python not found</td><td>重新安装 Python 3.12+，勾选 Add Python to PATH；安装后关闭并重新打开启动窗口。</td></tr>
@@ -36,7 +38,7 @@
                 <h2>跨电脑复制与数据保留</h2>
                 <p>建议在目标电脑重新下载稳定版，避免直接复用原电脑的 <code>backend/.venv</code> 和 <code>frontend/node_modules</code>。保留数据时，先关闭 QFO 并备份，按<a href="/guides/upgrade-data-migration">数据迁移教程</a>复制数据库，再运行首次启动脚本。不要为了重建环境删除数据库或本地配置。</p>
                 <h2>四、提交问题前准备</h2>
-                <p>如果仍然失败，请记录 Windows 版本、Python 版本、Node.js 版本、项目解压路径、完整错误截图，以及 <code>backend/logs/</code> 中的启动日志。Token、API Key 等敏感信息必须遮挡或删除。</p>
+                <p>如果仍然失败，请记录 Windows 版本、Python 版本、Node.js 版本、项目解压路径，以及启动器、QFO Backend 和 QFO Frontend 窗口中的完整错误信息。Token、API Key 等敏感信息必须遮挡或删除。</p>
                 <div class="guide-actions"><a class="button primary" href="https://github.com/yeh2017/QFO-Quant-Platform/discussions/categories/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98" target="_blank" rel="noopener noreferrer">到 Discussions 交流</a><a class="button" href="https://github.com/yeh2017/QFO-Quant-Platform/issues/new?template=install-failure.yml" target="_blank" rel="noopener noreferrer">安装失败反馈</a></div>
             </div>
         </article>

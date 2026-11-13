@@ -4,6 +4,8 @@ QFO Quant Platform Website 是 [QFO量化回测平台](https://github.com/yeh201
 
 网站覆盖数据中台、智能选股、因子模块、策略回测、组合风控、可视化分析、新闻中心和在线实战沙盒，用于帮助用户理解 QFO 的主要模块和使用路径。
 
+当前版本 **v1.0.5**：累计继承 v1.0.3 的功能修复和 v1.0.4 的安装改进，新增首次／快速启动分离、可见日志与启动进度，并固定 AkShare 1.18.91。[完整更新日志](https://github.com/yeh2017/QFO-Quant-Platform/blob/main/CHANGELOG.md)。
+
 ## 在线访问
 
 [https://www.qfo-quant-platform.com/](https://www.qfo-quant-platform.com/)
